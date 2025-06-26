@@ -1,7 +1,6 @@
 import pandas as pd
-from node import Node  # Supondo que a classe Node esteja no arquivo node.py
-from edge import Edge  # Supondo que a classe Edge esteja no arquivo edge.py
-from graph import Graph  # Supondo que a classe Graph esteja no arquivo graph.py
+from node import Node 
+from graph import Graph
 
 # Caminho do arquivo CSV
 file_path = r'C:\Users\lucas\OneDrive\Documentos\Desenvolvimento\tarnished-journey\tarnished-journey\tarnished_journey\data\dados_elden_ring.csv'

@@ -21,7 +21,7 @@ class Graph:
 
     def get_neighbors(self, node_location):
         return self.edges.get(node_location, [])
-    
+
     def display_graph(self):
         # Criando o grafo do NetworkX
         G = nx.Graph()
@@ -30,18 +30,28 @@ class Graph:
         for node_location, node in self.nodes.items():
             # Garantir que as posições sejam floats
             x, y = float(node.position[0]), float(node.position[1])
-            G.add_node(node_location, pos=(x, y))  # Adicionando posição com base em X, Y
+            G.add_node(node_location, pos=(y, -x))  # Adicionando posição com base em X, Y
 
         for node_location, neighbors in self.edges.items():
             for edge in neighbors:
                 G.add_edge(node_location, edge.end_node, weight=edge.distance, difficulty=edge.difficulty)
 
-        # Configurando as posições dos nós no gráfico
+        # Usando as posições X, Y passadas manualmente
         pos = nx.get_node_attributes(G, 'pos')
 
-        # Desenhando o grafo
-        plt.figure(figsize=(10, 8))
-        nx.draw(G, pos, with_labels=True, node_size=3000, node_color='skyblue', font_size=10, font_weight='bold', edge_color='gray')
+        # Verificando as posições manualmente antes de desenhar
+        print("Posições dos Nós:", pos)
+
+        # Desenhando o grafo com as posições fixadas
+        plt.figure(figsize=(12, 10))  # Tamanho maior para melhor visualização
+        nx.draw(G, pos, with_labels=True, node_size=3000, node_color='skyblue', font_size=10, font_weight='bold', edge_color='gray', 
+                font_color='black', node_shape='o', width=1.5)
+
+        # Garantir que os eixos X e Y tenham a mesma escala
+        plt.axis('equal')  # Define a proporção igual para os eixos X e Y
+
+        # Caso a origem seja no topo, inverte o eixo Y
+        plt.gca().invert_yaxis()
 
         # Desenhando os rótulos das arestas com base nos pesos (distância ou dificuldade)
         edge_labels = nx.get_edge_attributes(G, 'weight')  # Exibe as distâncias nas arestas
