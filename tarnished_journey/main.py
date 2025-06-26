@@ -6,7 +6,7 @@ from graph import Graph
 file_path = r'C:\Users\lucas\OneDrive\Documentos\Desenvolvimento\tarnished-journey\tarnished-journey\tarnished_journey\data\dados_elden_ring.csv'
 
 # Carregar o arquivo CSV
-df = pd.read_csv(file_path, encoding='ISO-8859-1', sep=';', decimal = ',')
+data_frame = pd.read_csv(file_path, encoding='ISO-8859-1', sep=';', decimal = ',')
 
 # Criando o grafo
 graph = Graph()
@@ -14,14 +14,14 @@ graph = Graph()
 # Adicionando os nós ao grafo
 nodes = {}
 
-for index, row in df.iterrows():
+for index, row in data_frame.iterrows():
     # Criando o nó com a localização e coordenadas
     node = Node(row['Graça Saída'], row['X - Saída'], row['Y - Saída'])
     nodes[row['Graça Saída']] = node
     graph.add_node(node)
 
 # Adicionando as arestas entre os nós
-for index, row in df.iterrows():
+for index, row in data_frame.iterrows():
     start_node = row['Graça Saída']
     end_node = row['Graça Chegada']
     distance = row['Tempo (s)']  # Tempo de viagem (distância)
@@ -30,4 +30,4 @@ for index, row in df.iterrows():
     graph.add_edge(start_node, end_node, distance, difficulty)
 
 # Exibir a estrutura do grafo
-graph.display_graph()
+graph.display_graph(data_frame)
