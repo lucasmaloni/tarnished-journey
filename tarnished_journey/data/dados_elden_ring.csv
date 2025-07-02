@@ -5,10 +5,10 @@ Cabana da Colina da Tormenta;-181,49;95,54;Túnel ao Castelo;-182,85;92,99;30;9
 Cabana da Colina da Tormenta;-181,49;95,54;Cabana do Mestre da Guerra;-181,5;101,93;25;1
 Cabana do Mestre da Guerra;-179;101,93;Ponte dos Santos;-176,18;108,4;33;5
 Frente do Porão;-186,5;103;Lago Agheel - Norte;-186,89;105,6;15;7
-Frente do Porão;-186,5;103;Costa de Turváguas;-183,15;109,92;38;6
+Frente do Porão;-186,5;103;Costa de Turváguas;-184,15;109,92;38;6
 Frente do Porão;-186,5;103;Cabana da Colina da Tormenta;-181,49;95,54;35;8
 Igreja de Elleh;-194;101,25;Frente do Porão;-186,5;103;35;4
-Lago Agheel - Norte;-188;105,6;Costa de Turváguas;-183,15;109,92;27;6
+Lago Agheel - Norte;-188;105,6;Costa de Turváguas;-184,15;109,92;27;6
 O primeiro Passo;-196,375;101,25;Igreja de Elleh;-194;101,25;17;10
 O primeiro Passo;-196,375;101,25;Porão Arruinado;-193,85;114,2;83;4
 O primeiro Passo;-196,375;101,25;Lago Agheel - Sul;-200;113,3;59;2
@@ -20,13 +20,21 @@ Porão Arruinado;-193,85;114,2;Arredores da Floresta Nebulosa;-185,62;116,9;50;1
 Terceira Igreja de Marika;-181,4;123,9;Forte Haight - Oeste;-195,42;123,43;71;3
 Igreja de Elleh;-194;101,25;Lago Agheel - Norte;-188;105,6;33;2
 Arredores da Floresta Nebulosa;-185,62;116,9;Forte Haight - Oeste;-195,42;123,43;47;4
-Costa de Turváguas;-183,15;109,92;Cabana do Artista;-182,42;115,04;72;5
-Costa de Turváguas;-183,15;109,92;Arredores da Floresta Nebulosa;-185,62;116,9;70;4
+Costa de Turváguas;-184,15;109,92;Cabana do Artista;-182,42;115,04;72;5
+Costa de Turváguas;-184,15;109,92;Arredores da Floresta Nebulosa;-185,62;116,9;70;4
 Lago Agheel - Norte;-188;105,6;Porão Arruinado;-193,85;114,2;57;6
 Lago Agheel - Sul;-200;113,3;Ponte do Sacríficio;-206,9;116,83;37;8
-Ponte do Sacríficio;-206,9;116,83;Sul da Torre do Vigia;-211,12;113,47;46;8
+Ponte do Sacríficio;-206,9;116,83;Sul da Torre do Vigia;-209,12;110;46;8
 Ponte do Sacríficio;-206,9;116,83;Campo Perfurado;-211,4;118,67;56;9
-Sul da Torre do Vigia;-211,12;110;Campo Perfurado;-211,4;118,67;38;3
+Sul da Torre do Vigia;-209,12;110;Campo Perfurado;-211,4;118,67;38;3
 Campo Perfurado;-211,4;118,67;Forte do Castelo Morne;-215;115;23;1
 Ponte do Sacríficio;-206,9;116,83;Forte do Castelo Morne;-215;115;41;8
-Sul da Torre do Vigia;-211,12;110;Forte do Castelo Morne;-215;115;21;4
+Sul da Torre do Vigia;-209,12;110;Forte do Castelo Morne;-215;115;21;4
+Forte do Castelo Morne;-215;115;Castelo Morne;-225;109;46;9
+Sul da Torre do Vigia;-209,12;110;Igreja da Peregrinação;-204;105,41;53;5
+Igreja da Peregrinação;-204;105,41;Ala do mausoléu;-213,7;103,18;40;2
+Igreja da Peregrinação;-204;105,41;Quarta Igreja de Marika;-211,79;96,23;62;3
+Igreja da Peregrinação;-204;105,41;Cabana do Mercador;-216,52;94,54;67;3
+Ala do mausoléu;-213,7;103,18;Quarta Igreja de Marika;-211,79;96,23;31;5
+Ala do mausoléu;-213,7;103,18;Cabana do Mercador;-216,52;94,54;34;1
+Quarta Igreja de Marika;-211,79;96,23;Cabana do Mercador;-216,52;94,54;28;5
