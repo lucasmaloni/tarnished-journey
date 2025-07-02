@@ -52,13 +52,11 @@ class Graph:
         edge_labels = nx.get_edge_attributes(G, 'weight')
         nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=7)
 
-        # --- INÍCIO DA ÚNICA MODIFICAÇÃO REAL ---
         # Se um caminho para destacar foi fornecido, desenhe-o por cima.
         if highlight_path and len(highlight_path) > 1:
             path_edges = list(zip(highlight_path, highlight_path[1:]))
             nx.draw_networkx_nodes(G, pos, nodelist=highlight_path, node_color='red', node_size=400)
             nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color='red', width=2.5)
-        # --- FIM DA MODIFICAÇÃO ---
 
         plt.title('Visualização do Grafo de Localizações')
         plt.axis('equal')
