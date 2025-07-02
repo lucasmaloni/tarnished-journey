@@ -52,9 +52,6 @@ class Graph:
         # Usando as posições X, Y passadas manualmente
         pos = nx.get_node_attributes(G, 'pos')
 
-        # Verificando as posições manualmente antes de desenhar
-        print("Posições dos Nós:", pos)
-
         # Desenhando o grafo com as posições fixadas
         plt.figure(figsize=(12, 10))  # Tamanho maior para melhor visualização
         nx.draw(G, pos, with_labels=True, node_size=300, node_color='Gold', font_size=10, font_weight='bold', edge_color='gray', 
