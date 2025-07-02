@@ -1,5 +1,5 @@
-from node import Node
-from edge import Edge
+from src.node import Node
+from src.edge import Edge
 import networkx as nx
 import matplotlib.pyplot as plt
 

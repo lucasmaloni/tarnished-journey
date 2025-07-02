@@ -1,6 +1,6 @@
 import pandas as pd
-from node import Node 
-from graph import Graph
+from src.node import Node 
+from src.graph import Graph
 
 # Caminho do arquivo CSV
 file_path = r'C:\Users\Lucas\Documents\Desenvolvimento\tarnished-journey\tarnished_journey\data\dados_elden_ring.csv'
