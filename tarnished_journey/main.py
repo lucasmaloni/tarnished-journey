@@ -1,8 +1,11 @@
 import pandas as pd
 from src.node import Node 
 from src.graph import Graph
+from pathlib import Path
 
-file_path = r'C:\Users\Lucas\Documents\Desenvolvimento\tarnished-journey\tarnished_journey\data\dados_elden_ring.csv'
+
+script_dir = Path(__file__).parent
+file_path = script_dir / "data" / "dados_elden_ring.csv"
 data_frame = pd.read_csv(file_path, encoding='ISO-8859-1', sep=';', decimal = ',')
 
 graph = Graph()
