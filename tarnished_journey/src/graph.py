@@ -68,6 +68,7 @@ class Graph:
         plt.show()
     
     def dijkstra(self, start_location, end_location):
+        '''Algoritmo Dijkstra'''
         distances = {node: float('inf') for node in self.nodes}
         if start_location not in distances:
             return None, float('inf')
@@ -112,6 +113,7 @@ class Graph:
         return path, distances[end_location]
 
     def bfs_by_level(self, start_location, max_levels):
+        '''Algoritmo BFS'''
         if start_location not in self.nodes:
             print(f"Erro: O local de partida '{start_location}' não existe.")
             return {}

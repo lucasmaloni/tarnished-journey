@@ -36,7 +36,7 @@ for index, row in data_frame.iterrows():
     end_node = row['Graça Chegada']
     distance = row['Tempo (s)']
     difficulty = row['Dificuldade']
-    # Esta chamada agora funcionará para todas as arestas.
+    
     graph.add_edge(start_node, end_node, distance, difficulty)
             
 while True:
