@@ -38,24 +38,55 @@ for index, row in data_frame.iterrows():
     difficulty = row['Dificuldade']
     # Esta chamada agora funcionará para todas as arestas.
     graph.add_edge(start_node, end_node, distance, difficulty)
-
-#Plotagem Grafo criado
-graph.display_graph(data_frame)
-
-#Demonstração Dijkstra
-start_node_name = "Ponte dos Santos"
-end_node_name = "Cabana do Mercador"
-
-print("\n--- Análise de Rota com Dijkstra ---")
-print(f"Calculando a rota mais rápida de '{start_node_name}' para '{end_node_name}'...")
-path, total_time = graph.dijkstra(start_node_name, end_node_name)
-
-if path:
-    print(f"\nRota encontrada! Tempo total: {total_time:.2f} segundos.")
-    print("Caminho: " + " -> ".join(path))
+            
+while True:
+    choice = int(input(f"Digite o que deseja fazer:\n1- Mostrar o grafo\n2- Mostrar o grafo com rota calculada pelo Dijkstra\n3- Fazer uma BFS a partir de um Nó\n0 - Sair\nEntrada: "))
     
-    # Exibe o SEGUNDO grafo, agora com o caminho destacado
-    print("\nExibindo o grafo com o caminho destacado...")
-    graph.display_graph(data_frame, highlight_path=path)
-else:
-    print("\nNão foi possível encontrar uma rota entre os pontos especificados.")
+    if choice == 1:
+        #Plotagem Grafo criado
+        graph.display_graph(data_frame)
+        
+    elif choice == 2:
+        #Demonstração Dijkstra
+        start_node_name = "Ponte dos Santos"
+        end_node_name = "Cabana do Mercador"
+
+        print("\n--- Análise de Rota com Dijkstra ---")
+        print(f"Calculando a rota mais rápida de '{start_node_name}' para '{end_node_name}'...")
+        path, total_time = graph.dijkstra(start_node_name, end_node_name)
+
+        if path:
+            print(f"\nRota encontrada! Tempo total: {total_time:.2f} segundos.")
+            print("Caminho: " + " -> ".join(path))
+            
+            # Exibe o SEGUNDO grafo, agora com o caminho destacado
+            print("\nExibindo o grafo com o caminho destacado...")
+            graph.display_graph(data_frame, highlight_path=path)
+        else:
+            print("\nNão foi possível encontrar uma rota entre os pontos especificados.")
+            
+    elif choice == 3:
+        #Demonstração BFS
+        start_node = "Porão Arruinado"
+        max_jumps = 3
+
+        print(f"\n--- Análise de Proximidade (BFS) ---")
+        print(f"Buscando locais a até {max_jumps} saltos de distância de '{start_node}':")
+
+        nearby_locations = graph.bfs_by_level(start_node, max_jumps)
+        
+        if not nearby_locations:
+            print("Nenhum local encontrado dentro do número de saltos especificado.")
+        else:
+            for level in sorted(nearby_locations.keys()):
+                locations = sorted(nearby_locations[level])
+                print(f"\nLocais a {level} salto(s) de distância:")
+                for loc in locations:
+                    print(f"  - {loc}")
+    
+    elif choice == 0:
+        print("Flw!")
+        break
+    
+    else:
+        print("Entrada inválida irmãozinho! Preste atenção!!")

@@ -3,35 +3,41 @@ from src.edge import Edge
 import networkx as nx
 import matplotlib.pyplot as plt
 import heapq
+from collections import deque
 
 class Graph:
     def __init__(self):
-        self.nodes = {}  # Dicionário de nós
-        self.edges = {}  # Dicionário de arestas
+        self.nodes = {}
 
     def add_node(self, node: Node):
         self.nodes[node.location] = node
-        self.edges[node.location] = []  # Inicializa lista de adjacência para o nó
 
-    def add_edge(self, start_node, end_node, distance, difficulty):
-        if start_node in self.nodes and end_node in self.nodes:
-            edge = Edge(start_node, end_node, distance, difficulty)
-            self.edges[start_node].append(edge)
-            edge_reverse = Edge(end_node, start_node, distance, difficulty)
-            self.edges[end_node].append(edge_reverse)
+    def add_edge(self, start_location, end_location, distance, difficulty):
+        '''Faz a conexão entre os nós e os adiciona na lista de adjacência'''
+        if start_location in self.nodes and end_location in self.nodes:
+            start_node = self.nodes[start_location]
+            end_node = self.nodes[end_location]
+
+            edge_forward = Edge(start_location, end_location, distance, difficulty)
+            start_node.neighbors.append(edge_forward)
+
+            edge_reverse = Edge(end_location, start_location, distance, difficulty)
+            end_node.neighbors.append(edge_reverse)
 
     def get_neighbors(self, node_location):
-        return self.edges.get(node_location, [])
+        '''Verifica se a localização é uma chave do dicionário e se for retorna a lista de vizinhos desse nó'''
+        if node_location in self.nodes:
+            return self.nodes[node_location].neighbors
+        return []
 
-    def display_graph(self, data_frame, highlight_path=None): # Parâmetro novo
+    def display_graph(self, data_frame, highlight_path=None):
+        '''Faz o display do grafo com networkx, se baseando nas informações presentes do nó'''
         G = nx.Graph()
 
-        # Lógica original para adicionar nós e posições
         for node_location, node in self.nodes.items():
             x, y = float(node.position[0]), float(node.position[1])
             G.add_node(node_location, pos=(y, -x))
 
-        # Lógica original para garantir que todos os nós de chegada existam
         for index, row in data_frame.iterrows():
             start_node = row['Graça Saída']
             end_node = row['Graça Chegada']
@@ -46,13 +52,11 @@ class Graph:
 
         pos = nx.get_node_attributes(G, 'pos')
         
-        # Desenho original do grafo
         plt.figure(figsize=(16, 12))
         nx.draw(G, pos, with_labels=True, node_size=300, node_color='Gold', font_size=9, edge_color='gray')
         edge_labels = nx.get_edge_attributes(G, 'weight')
         nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=7)
 
-        # Se um caminho para destacar foi fornecido, desenhe-o por cima.
         if highlight_path and len(highlight_path) > 1:
             path_edges = list(zip(highlight_path, highlight_path[1:]))
             nx.draw_networkx_nodes(G, pos, nodelist=highlight_path, node_color='red', node_size=400)
@@ -65,9 +69,8 @@ class Graph:
     
     def dijkstra(self, start_location, end_location):
         distances = {node: float('inf') for node in self.nodes}
-        # Verificação para garantir que o nó de partida existe antes de acessá-lo
         if start_location not in distances:
-            return None, float('inf') # Retorna se o nó de partida não for válido
+            return None, float('inf')
         
         distances[start_location] = 0
         
@@ -86,7 +89,6 @@ class Graph:
 
             for edge in self.get_neighbors(current_location):
                 neighbor_location = edge.end_node
-                # Se o vizinho por acaso não estiver no dict de distâncias, pule-o.
                 if neighbor_location not in distances:
                     continue
                     
@@ -98,7 +100,6 @@ class Graph:
                     previous_nodes[neighbor_location] = current_location
                     heapq.heappush(priority_queue, (distance_through_current, neighbor_location))
         
-        # Se o caminho não foi encontrado ou o nó de destino é inalcançável
         if not path_found or distances[end_location] == float('inf'):
             return None, float('inf')
 
@@ -109,3 +110,32 @@ class Graph:
             current_node = previous_nodes[current_node]
             
         return path, distances[end_location]
+
+    def bfs_by_level(self, start_location, max_levels):
+        if start_location not in self.nodes:
+            print(f"Erro: O local de partida '{start_location}' não existe.")
+            return {}
+
+        queue = deque([(start_location, 0)])
+        visited = {start_location}
+        levels_found = {}
+
+        while queue:
+            current_location, current_level = queue.popleft()
+
+            if current_level not in levels_found:
+                levels_found[current_level] = []
+            
+            if current_location != start_location:
+                levels_found[current_level].append(current_location)
+
+            if current_level >= max_levels:
+                continue
+
+            for edge in self.get_neighbors(current_location):
+                neighbor = edge.end_node
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    queue.append((neighbor, current_level + 1))
+                    
+        return {level: locations for level, locations in levels_found.items() if locations}
