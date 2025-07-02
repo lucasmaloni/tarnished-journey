@@ -50,10 +50,11 @@ class Graph:
             G.add_edge(end_node, start_node, weight=distance, difficulty=difficulty)  # Aresta bilateral
 
         # Usando as posições X, Y passadas manualmente
-        pos = nx.get_node_attributes(G, 'pos')
+        pos = nx.get_node_attributes(G, 'pos')      
 
         # Desenhando o grafo com as posições fixadas
         plt.figure(figsize=(12, 10))  # Tamanho maior para melhor visualização
+        
         nx.draw(G, pos, with_labels=True, node_size=300, node_color='Gold', font_size=10, font_weight='bold', edge_color='gray', 
                 font_color='black', node_shape='o', width=1.5)
 
