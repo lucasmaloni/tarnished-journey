@@ -56,20 +56,12 @@ while True:
         graph.display_graph(data_frame)
         
     elif choice == 2:
-        #Demonstração Dijkstra
-        start_node_name = "Ponte dos Santos"
-        end_node_name = "Cabana do Mercador"
+        start_node_name = "Forte Haight - Oeste" #Nó saída
+        end_node_name = "Cabana do Mercador" #Nó chegada
 
-        print("\n--- Análise de Rota com Dijkstra ---")
-        print(f"Calculando a rota mais rápida de '{start_node_name}' para '{end_node_name}'...")
         path, total_time = graph.dijkstra(start_node_name, end_node_name)
 
         if path:
-            print(f"\nRota encontrada! Tempo total: {total_time:.2f} segundos.")
-            print("Caminho: " + " -> ".join(path))
-            
-            # Exibe o SEGUNDO grafo, agora com o caminho destacado
-            print("\nExibindo o grafo com o caminho destacado...")
             graph.display_graph(data_frame, highlight_path=path)
         else:
             print("\nNão foi possível encontrar uma rota entre os pontos especificados.")
@@ -126,9 +118,6 @@ while True:
         node, value = graph.calculate_closeness_centrality()
         
         if node:
-            print(f"O local mais bem posicionado da rede é '{node}'.")
-            print(f"Valor de Centralidade: {value:.3f}")
-            print("Interpretação: Este local tem a menor distância média para todos os outros locais. É o ponto mais eficiente para se locomover por todo o mapa.")
             
             print("\nExibindo o mapa com o nó de melhor acesso destacado...")
             graph.display_graph(data_frame, highlight_nodes=[node])
