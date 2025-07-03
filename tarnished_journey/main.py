@@ -56,8 +56,8 @@ while True:
         graph.display_graph(data_frame)
         
     elif choice == 2:
-        start_node_name = "Forte Haight - Oeste" #Nó saída
-        end_node_name = "Cabana do Mercador" #Nó chegada
+        start_node_name = "Quarta Igreja de Marika" #Nó saída
+        end_node_name = "Túnel ao Castelo" #Nó chegada
 
         path, total_time = graph.dijkstra(start_node_name, end_node_name)
 
@@ -89,16 +89,11 @@ while True:
         node, value = graph.calculate_degree_centrality()
         
         if node:
-            print(f"O principal 'hub' da rede é '{node}'.")
-            print(f"Valor de Centralidade: {value:.3f}")
-            print("Interpretação: Este é o local com o maior número de conexões diretas, funcionando como o principal 'cruzamento' do mapa.")
             graph.display_graph(data_frame, highlight_nodes=[node])
         else:
             print("Não foi possível calcular a centralidade.")
     
     elif choice == 5:
-        print("\n--- Análise de Centralidade de Intermediação ---")
-        
         node, value = graph.calculate_betweenness_centrality()
         
         if node:
@@ -108,8 +103,6 @@ while True:
             print("Não foi possível calcular a centralidade.")
     
     elif choice == 6:
-        print("\n--- Análise de Centralidade de Proximidade ---")
-        
         node, value = graph.calculate_closeness_centrality()
         
         if node:
