@@ -102,11 +102,6 @@ while True:
         node, value = graph.calculate_betweenness_centrality()
         
         if node:
-            print(f"A principal 'ponte' da rede é '{node}'.")
-            print(f"Valor de Centralidade: {value:.3f}")
-            print("Interpretação: Este local é crucial, servindo como um corredor estratégico ou 'gargalo' no mapa. Muitos dos caminhos mais curtos passam por aqui.")
-            
-            print("\nExibindo o mapa com o nó estratégico destacado...")
             graph.display_graph(data_frame, highlight_nodes=[node])
             
         else:
