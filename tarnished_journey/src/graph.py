@@ -72,7 +72,7 @@ class Graph:
         plt.show()
     
     def calculate_degree_centrality(self):
-        """Calcula a Centralidade de Grau e retorna o nó mais central."""
+        '''Calcula a Centralidade de Grau e retorna o nó mais central.'''
         if not self.nodes:
             return None, 0
 
@@ -96,7 +96,7 @@ class Graph:
         return most_central_node, centrality[most_central_node]
     
     def calculate_betweenness_centrality(self):
-        """Calcula a Centralidade de Intermediação e retorna o nó mais central."""
+        '''Calcula a Centralidade de Intermediação e retorna o nó mais central.'''
         if not self.nodes:
             return None, 0
 
@@ -120,7 +120,7 @@ class Graph:
         return most_central_node, centrality[most_central_node]
     
     def calculate_closeness_centrality(self):
-        """Calcula a Centralidade de Proximidade e retorna o nó mais central."""
+        '''Calcula a Centralidade de Proximidade e retorna o nó mais central.'''
         if not self.nodes:
             return None, 0
 

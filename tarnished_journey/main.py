@@ -47,8 +47,8 @@ while True:
     print("3- Fazer uma BFS a partir de um Nó")
     print("4- Análise de hub central")
     print("5- Análise de centralidade de intermediação")
-    print("6 - Análise de Centralidade de Proximidade")
-    print("0 - Sair\n")
+    print("6- Análise de Centralidade de Proximidade")
+    print("0- Sair\n")
     choice = int(input("Entrada: "))
     
     if choice == 1:
