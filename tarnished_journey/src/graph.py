@@ -30,7 +30,7 @@ class Graph:
             return self.nodes[node_location].neighbors
         return []
 
-    def display_graph(self, data_frame, highlight_path=None):
+    def display_graph(self, data_frame, highlight_path=None, highlight_nodes=None):
         '''Faz o display do grafo com networkx, se baseando nas informações presentes do nó'''
         G = nx.Graph()
 
@@ -62,11 +62,87 @@ class Graph:
             nx.draw_networkx_nodes(G, pos, nodelist=highlight_path, node_color='red', node_size=400)
             nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color='red', width=2.5)
 
+        if highlight_nodes:
+            # Usamos uma cor diferente (ex: Ciano) para não confundir com o caminho
+            nx.draw_networkx_nodes(G, pos, nodelist=highlight_nodes, node_color="#165824", node_size=600)
+        
         plt.title('Visualização do Grafo de Localizações')
         plt.axis('equal')
         plt.gca().invert_yaxis()
         plt.show()
     
+    def calculate_degree_centrality(self):
+        """Calcula a Centralidade de Grau e retorna o nó mais central."""
+        if not self.nodes:
+            return None, 0
+
+        G = nx.Graph()
+        for node_location in self.nodes:
+            G.add_node(node_location)
+        
+        for node_obj in self.nodes.values():
+            for edge in node_obj.neighbors:
+                G.add_edge(edge.start_node, edge.end_node)
+
+        # Calcula a centralidade de grau para todos os nós
+        centrality = nx.degree_centrality(G)
+        
+        if not centrality:
+            return None, 0
+
+        # Encontra o nó com o maior valor de centralidade
+        most_central_node = max(centrality, key=centrality.get)
+        
+        return most_central_node, centrality[most_central_node]
+    
+    def calculate_betweenness_centrality(self):
+        """Calcula a Centralidade de Intermediação e retorna o nó mais central."""
+        if not self.nodes:
+            return None, 0
+
+        G = nx.Graph()
+        for node_location in self.nodes:
+            G.add_node(node_location)
+        
+        for node_obj in self.nodes.values():
+            for edge in node_obj.neighbors:
+                G.add_edge(edge.start_node, edge.end_node)
+
+        # Calcula a centralidade de intermediação para todos os nós
+        centrality = nx.betweenness_centrality(G, normalized=True)
+        
+        if not centrality:
+            return None, 0
+
+        # Encontra o nó com o maior valor de centralidade
+        most_central_node = max(centrality, key=centrality.get)
+        
+        return most_central_node, centrality[most_central_node]
+    
+    def calculate_closeness_centrality(self):
+        """Calcula a Centralidade de Proximidade e retorna o nó mais central."""
+        if not self.nodes:
+            return None, 0
+
+        G = nx.Graph()
+        for node_location in self.nodes:
+            G.add_node(node_location)
+        
+        for node_obj in self.nodes.values():
+            for edge in node_obj.neighbors:
+                G.add_edge(edge.start_node, edge.end_node)
+
+        # Calcula a centralidade de proximidade para todos os nós
+        centrality = nx.closeness_centrality(G)
+        
+        if not centrality:
+            return None, 0
+
+        # Encontra o nó com o maior valor de centralidade
+        most_central_node = max(centrality, key=centrality.get)
+        
+        return most_central_node, centrality[most_central_node]
+        
     def dijkstra(self, start_location, end_location):
         '''Algoritmo Dijkstra'''
         distances = {node: float('inf') for node in self.nodes}

@@ -40,7 +40,16 @@ for index, row in data_frame.iterrows():
     graph.add_edge(start_node, end_node, distance, difficulty)
             
 while True:
-    choice = int(input(f"Digite o que deseja fazer:\n1- Mostrar o grafo\n2- Mostrar o grafo com rota calculada pelo Dijkstra\n3- Fazer uma BFS a partir de um Nó\n0 - Sair\nEntrada: "))
+    
+    print("Digite o que deseja fazer:")
+    print("1- Plotar o grafo")
+    print("2- Mostrar o grafo com rota calculada pelo Dijkstra")
+    print("3- Fazer uma BFS a partir de um Nó")
+    print("4- Análise de hub central")
+    print("5- Análise de centralidade de intermediação")
+    print("6 - Análise de Centralidade de Proximidade")
+    print("0 - Sair\n")
+    choice = int(input("Entrada: "))
     
     if choice == 1:
         #Plotagem Grafo criado
@@ -83,6 +92,49 @@ while True:
                 print(f"\nLocais a {level} salto(s) de distância:")
                 for loc in locations:
                     print(f"  - {loc}")
+    
+    elif choice ==4:
+        node, value = graph.calculate_degree_centrality()
+        
+        if node:
+            print(f"O principal 'hub' da rede é '{node}'.")
+            print(f"Valor de Centralidade: {value:.3f}")
+            print("Interpretação: Este é o local com o maior número de conexões diretas, funcionando como o principal 'cruzamento' do mapa.")
+            graph.display_graph(data_frame, highlight_nodes=[node])
+        else:
+            print("Não foi possível calcular a centralidade.")
+    
+    elif choice == 5:
+        print("\n--- Análise de Centralidade de Intermediação ---")
+        
+        node, value = graph.calculate_betweenness_centrality()
+        
+        if node:
+            print(f"A principal 'ponte' da rede é '{node}'.")
+            print(f"Valor de Centralidade: {value:.3f}")
+            print("Interpretação: Este local é crucial, servindo como um corredor estratégico ou 'gargalo' no mapa. Muitos dos caminhos mais curtos passam por aqui.")
+            
+            print("\nExibindo o mapa com o nó estratégico destacado...")
+            graph.display_graph(data_frame, highlight_nodes=[node])
+            
+        else:
+            print("Não foi possível calcular a centralidade.")
+    
+    elif choice == 6:
+        print("\n--- Análise de Centralidade de Proximidade ---")
+        
+        node, value = graph.calculate_closeness_centrality()
+        
+        if node:
+            print(f"O local mais bem posicionado da rede é '{node}'.")
+            print(f"Valor de Centralidade: {value:.3f}")
+            print("Interpretação: Este local tem a menor distância média para todos os outros locais. É o ponto mais eficiente para se locomover por todo o mapa.")
+            
+            print("\nExibindo o mapa com o nó de melhor acesso destacado...")
+            graph.display_graph(data_frame, highlight_nodes=[node])
+            
+        else:
+            print("Não foi possível calcular a centralidade.")
     
     elif choice == 0:
         print("Flw!")
